@@ -8,6 +8,7 @@ from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
+from src.conf.config import settings
 
 from src.database.conn_to_db import get_db
 from src.repository import users as repository_users
@@ -15,10 +16,10 @@ from src.repository import users as repository_users
 
 class Auth:
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    SECRET_KEY = "secret_key"
-    ALGORITHM = "HS256"
+    SECRET_KEY = settings.jwt_secret_key
+    ALGORITHM = settings.jwt_algorithm
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=settings.redis_host, port=settings.redis_port, db=0)
 
     def verify_password(self, plain_password, hashed_password):
         return self.pwd_context.verify(plain_password, hashed_password)

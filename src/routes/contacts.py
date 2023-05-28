@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Path, status, Query
+from fastapi_limiter.depends import RateLimiter
 from sqlalchemy.orm import Session
 
 from src.database.conn_to_db import get_db
@@ -12,7 +13,8 @@ from src.services.auth import auth_service
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/", response_model=List[ContactResponse])
+@router.get("/", response_model=List[ContactResponse], dependencies=[Depends(RateLimiter(times=2, seconds=5))],
+            description="Two request on 5 second")
 async def get_contacts(limit: int = Query(10, le=300), offset: int = 0, db: Session = Depends(get_db)):
     contacts = await repository_contacts.get_contacts(limit, offset, db)
     return contacts

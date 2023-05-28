@@ -1,19 +1,20 @@
-from pathlib import Path
 import logging
+from pathlib import Path
 
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from fastapi_mail.errors import ConnectionErrors
 from pydantic import EmailStr
 
+from src.conf.config import settings
 from src.services.auth import auth_service
 
 conf = ConnectionConfig(
-    MAIL_USERNAME="ardante@meta.ua",
-    MAIL_PASSWORD="P1cbd0acb1M",
-    MAIL_FROM=EmailStr("ardante@meta.ua"),
-    MAIL_PORT=465,
-    MAIL_SERVER="smtp.meta.ua",
-    MAIL_FROM_NAME="Contacts",
+    MAIL_USERNAME=settings.mail_username,
+    MAIL_PASSWORD=settings.mail_password,
+    MAIL_FROM=EmailStr(settings.mail_from),
+    MAIL_PORT=settings.mail_port,
+    MAIL_SERVER=settings.mail_server,
+    MAIL_FROM_NAME="Cat System Corporation",
     MAIL_STARTTLS=False,
     MAIL_SSL_TLS=True,
     USE_CREDENTIALS=True,
