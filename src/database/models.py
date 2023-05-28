@@ -1,6 +1,4 @@
-import enum
-
-from sqlalchemy import Column, Integer, String, DateTime, func, Enum
+from sqlalchemy import Column, Integer, String, DateTime, func, Boolean
 from sqlalchemy.orm import declarative_base
 
 from src.database.conn_to_db import engine
@@ -30,6 +28,6 @@ class User(Base):
     password = Column(String(255), nullable=False)
     avatar = Column(String(255), nullable=True)
     refresh_token = Column(String(255), nullable=True)
+    confirmed = Column(Boolean, default=False)
 
 
-Base.metadata.create_all(bind=engine)
