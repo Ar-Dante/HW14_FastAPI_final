@@ -23,7 +23,11 @@ psycopg2 = "^2.9.6"
 fastapi-limiter = "^0.1.5"
 cloudinary = "^1.33.0"
 sphinx = "^7.0.1"
+pytest = "^7.3.1"
+httpx = "^0.24.1"
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
 
 [build-system]
 requires = ["poetry-core"]
