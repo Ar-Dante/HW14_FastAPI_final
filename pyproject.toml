@@ -22,6 +22,7 @@ redis = "^4.5.5"
 psycopg2 = "^2.9.6"
 fastapi-limiter = "^0.1.5"
 cloudinary = "^1.33.0"
+sphinx = "^7.0.1"
 
 
 [build-system]

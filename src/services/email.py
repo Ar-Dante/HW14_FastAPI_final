@@ -24,6 +24,18 @@ conf = ConnectionConfig(
 
 
 async def send_email(email: EmailStr, username: str, host: str):
+    """
+    The send_email function sends an email to the user with a link to confirm their email address.
+        The function takes in three parameters:
+            -email: the user's email address, which is used as a recipient for the message and also as part of
+                the token verification payload. This parameter must be of type EmailStr (a custom class that validates
+                whether or not an input string is a valid email). If it isn't, then this function will raise an exception.
+
+    :param email: EmailStr: Ensure that the email is a valid email address
+    :param username: str: Get the username of the user who is trying to register
+    :param host: str: Send the host to the email template
+    :return: A coroutine object, which is an awaitable
+    """
     try:
         token_verification = auth_service.create_email_token({"sub": email})
         message = MessageSchema(
