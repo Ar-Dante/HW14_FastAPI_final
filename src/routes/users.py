@@ -30,7 +30,6 @@ async def update_avatar_user(avatar: UploadFile = File(), current_user: User = D
                              db: Session = Depends(get_db)):
     """
     The update_avatar_user function updates the avatar of a user.
-
     :param avatar: UploadFile: Receive the file sent by the user
     :param current_user: User: Get the current user from the database
     :param db: Session: Access the database
